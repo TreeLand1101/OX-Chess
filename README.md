@@ -20,3 +20,4 @@ other
 - increase password security with md5
 - send message to player
 - surrender in the game
+- handle some invalid input issues
