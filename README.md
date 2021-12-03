@@ -14,7 +14,7 @@ make
 - 雙方可輪流下棋，直到分出勝負或平手。
 - 登入的使用者可選擇登出。
 
-other
+bonus
 - list player's winrate
 - create own account
 - increase password security with md5
