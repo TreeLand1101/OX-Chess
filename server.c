@@ -156,14 +156,7 @@ int main(){
 					printf( "New connection from %s\n" , address_buffer );
 					
 					char buffer[L_SIZE] = {0};
-					strcat( buffer, "WELCOME TO \n" );
-					strcat( buffer, "\n" );
-					strcat( buffer, "    ###    #   #    ###   #   #   #####    ####    ####    \n" );
-					strcat( buffer, "   #   #    # #    #      #   #   #       #       #        \n" );
-					strcat( buffer, "   #   #     #     #      #####   #####   #####   #####    \n" );
-					strcat( buffer, "   #   #    # #    #      #   #   #           #       #    \n" );
-					strcat( buffer, "    ###    #   #    ###   #   #   #####   ####    ####     \n" );
-					strcat( buffer, "\n" );
+					strcat( buffer, "WELCOME TO OXCHESS\n" );
 					send( socket_client, buffer, strlen( buffer ), 0 );					
 					send( socket_client, "Please enter your account or the account you want to register:\n", 63, 0 ); 
 				}
