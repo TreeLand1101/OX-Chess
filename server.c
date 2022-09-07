@@ -15,6 +15,7 @@
 #define S_SIZE 64
 #define M_SIZE 256
 #define L_SIZE 1024
+#define XL_SIZE 4096
 
 struct user{
 	char* account;
@@ -46,6 +47,7 @@ unsigned long hash( unsigned char* str );	//djb2 hash algorithm
 char *str2md5( const char *str, int length );	//source : https://stackoverflow.com/a/8389763
 int check( const char board[3][3] );
 void menu( int fd );
+void logo( int fd );
 void clear( int fd, fd_set* m );
 void init( int fd );
 void sighandler_ctrlc();
@@ -155,9 +157,7 @@ int main(){
 				
 					printf( "New connection from %s\n" , address_buffer );
 					
-					char buffer[L_SIZE] = {0};
-					strcat( buffer, "WELCOME TO OXCHESS\n" );
-					send( socket_client, buffer, strlen( buffer ), 0 );					
+					logo(socket_client);					
 					send( socket_client, "Please enter your account or the account you want to register:\n", 63, 0 ); 
 				}
 
@@ -715,6 +715,21 @@ int check( const char board[3][3] ){
 	}
 
 	return 2;
+}
+
+void logo( int fd ){
+	char buffer[XL_SIZE] = {0};
+	strcat( buffer, "+=============================================================================================+\n" );
+	strcat( buffer, "|  ▄██████▄  ▀████    ▐████▀  ▄████████    ▄█    █▄       ▄████████    ▄████████    ▄████████ |\n" );
+	strcat( buffer, "| ███    ███   ███▌   ████▀  ███    ███   ███    ███     ███    ███   ███    ███   ███    ███ |\n" );
+	strcat( buffer, "| ███    ███    ███  ▐███    ███    █▀    ███    ███     ███    █▀    ███    █▀    ███    █▀  |\n" );
+	strcat( buffer, "| ███    ███    ▀███▄███▀    ███         ▄███▄▄▄▄███▄▄  ▄███▄▄▄       ███          ███        |\n" );
+	strcat( buffer, "| ███    ███    ████▀██▄     ███        ▀▀███▀▀▀▀███▀  ▀▀███▀▀▀     ▀███████████ ▀███████████ |\n" );
+	strcat( buffer, "| ███    ███   ▐███  ▀███    ███    █▄    ███    ███     ███    █▄           ███          ███ |\n" );
+	strcat( buffer, "| ███    ███  ▄███     ███▄  ███    ███   ███    ███     ███    ███    ▄█    ███    ▄█    ███ |\n" );
+	strcat( buffer, "| ▀██████▀  ████       ███▄ ████████▀    ███    █▀      ██████████  ▄████████▀   ▄████████▀   |\n" );
+	strcat( buffer, "+=============================================================================================+\n" );
+	send( fd, buffer, strlen( buffer ), 0 );
 }
 
 void menu( int fd ){
